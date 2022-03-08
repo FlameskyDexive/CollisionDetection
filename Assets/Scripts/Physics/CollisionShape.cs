@@ -1,7 +1,9 @@
 ﻿
 
+using System;
 using System.Numerics;
 
+[Serializable]
 public abstract class CollisionShape  
 {
     

@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Quaternion = System.Numerics.Quaternion;
 
-public class SphereGameObject : MonoBehaviour
+public class SphereObject : MonoBehaviour
 {
 
     public CollisionShape data;
     // Use this for initialization
     void Start()
     {
-        // Quaternion qua = Quaternion.Euler(transform.eulerAngles);
-
+        data = new SphereShape();
     }
 
     // Update is called once per frame

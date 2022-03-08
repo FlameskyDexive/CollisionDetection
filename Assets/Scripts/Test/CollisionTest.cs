@@ -1,22 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class CollisionTest : MonoBehaviour
 {
 
     [SerializeField]
-    OBBGameObject sourcesTarget;
+    BoxObject sourcesTarget;
     
 
     [SerializeField]
-    OBBGameObject targetOBB;
+    BoxObject targetOBB;
     // Use this for initialization
 
     [SerializeField]
-    SphereGameObject sphere;
+    SphereObject sphere;
     [SerializeField]
-    SphereGameObject sphereTarget;
+    SphereObject sphereTarget;
     [SerializeField]
     private bool obbClosion;
 
@@ -87,4 +88,14 @@ public class CollisionTest : MonoBehaviour
 
 
     }
+
+    void OnGUI()
+    {
+        if ( GUI.Button(new Rect(0, 0, 360, 50), "convert Math between Unity and .netcore"))
+        {
+            Debug.Log($"angle:{transform.eulerAngles}, angle convert:{MathHelper.QuaternionToEuler(transform.rotation)}, " +
+                      $"qua:{transform.rotation}, qua convert:{MathHelper.EulerToQuaternion(transform.eulerAngles).ToStringF1()}");
+        }
+    }
+    
 }
