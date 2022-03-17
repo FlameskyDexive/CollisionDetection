@@ -1,8 +1,5 @@
-﻿
-
-using System;
-using Quaternion = System.Numerics.Quaternion;
-using Vector3 = System.Numerics.Vector3;
+﻿using System;
+using UnityEngine;
 
 
 [Serializable]
@@ -31,7 +28,7 @@ public class BoxShape : CollisionShape
 
     float LengthSq(Vector3 p)
     {
-        return p.X * p.X + p.Y * p.Y + p.Z * p.Z;
+        return p.x * p.x + p.y * p.y + p.z * p.z;
     }
 
     
@@ -43,13 +40,13 @@ public class BoxShape : CollisionShape
         maxPoint = (p_maxPoint);
 
         Vector3 size = HalfSize();
-        r.X = size.X;
-        r.Y = size.Y;
-        r.Z = size.Z;
+        r.x = size.x;
+        r.y = size.y;
+        r.z = size.z;
 
-        rArray[0] = r.X;
-        rArray[1] = r.Y;
-        rArray[2] = r.Z;
+        rArray[0] = r.x;
+        rArray[1] = r.y;
+        rArray[2] = r.z;
         
         axis[0] = MathHelper.TransformWithoutOverlap(quaternion, new Vector3(1, 0, 0));
         axis[1] = MathHelper.TransformWithoutOverlap(quaternion, new Vector3(0, 1, 0));
@@ -156,64 +153,64 @@ public class BoxShape : CollisionShape
         {
             ra = rArray[0] * AbsR[0][i] + rArray[1] * AbsR[1][i] + rArray[2] * AbsR[2][i];
             rb = b.rArray[i];
-            if (Math.Abs(t.X * R[0][i] + t.Y * R[1][i] + t.Z * R[2][i]) > ra + rb)
+            if (Math.Abs(t.x * R[0][i] + t.y * R[1][i] + t.z * R[2][i]) > ra + rb)
                 return false;
         }
 
         // Test the 9 different cross-axes.
 
-        // A.X <cross> B.X
-        ra = r.Y * AbsR[2][0] + r.Z * AbsR[1][0];
-        rb = b.r.Y * AbsR[0][2] + b.r.Z * AbsR[0][1];
-        if (Math.Abs(t.Z * R[1][0] - t.Y * R[2][0]) > ra + rb)
+        // A.x <cross> B.x
+        ra = r.y * AbsR[2][0] + r.z * AbsR[1][0];
+        rb = b.r.y * AbsR[0][2] + b.r.z * AbsR[0][1];
+        if (Math.Abs(t.z * R[1][0] - t.y * R[2][0]) > ra + rb)
             return false;
 
-        // A.X < cross> B.Y
-        ra = r.Y * AbsR[2][1] + r.Z * AbsR[1][1];
-        rb = b.r.X * AbsR[0][2] + b.r.Z * AbsR[0][0];
-        if (Math.Abs(t.Z * R[1][1] - t.Y * R[2][1]) > ra + rb)
+        // A.x < cross> B.y
+        ra = r.y * AbsR[2][1] + r.z * AbsR[1][1];
+        rb = b.r.x * AbsR[0][2] + b.r.z * AbsR[0][0];
+        if (Math.Abs(t.z * R[1][1] - t.y * R[2][1]) > ra + rb)
             return false;
 
-        // A.X <cross> B.Z
-        ra = r.Y * AbsR[2][2] + r.Z * AbsR[1][2];
-        rb = b.r.X * AbsR[0][1] + b.r.Y * AbsR[0][0];
-        if (Math.Abs(t.Z * R[1][2] - t.Y * R[2][2]) > ra + rb)
+        // A.x <cross> B.z
+        ra = r.y * AbsR[2][2] + r.z * AbsR[1][2];
+        rb = b.r.x * AbsR[0][1] + b.r.y * AbsR[0][0];
+        if (Math.Abs(t.z * R[1][2] - t.y * R[2][2]) > ra + rb)
             return false;
 
-        // A.Y <cross> B.X
-        ra = r.X * AbsR[2][0] + r.Z * AbsR[0][0];
-        rb = b.r.Y * AbsR[1][2] + b.r.Z * AbsR[1][1];
-        if (Math.Abs(t.X * R[2][0] - t.Z * R[0][0]) > ra + rb)
+        // A.y <cross> B.x
+        ra = r.x * AbsR[2][0] + r.z * AbsR[0][0];
+        rb = b.r.y * AbsR[1][2] + b.r.z * AbsR[1][1];
+        if (Math.Abs(t.x * R[2][0] - t.z * R[0][0]) > ra + rb)
             return false;
 
-        // A.Y <cross> B.Y
-        ra = r.X * AbsR[2][1] + r.Z * AbsR[0][1];
-        rb = b.r.X * AbsR[1][2] + b.r.Z * AbsR[1][0];
-        if (Math.Abs(t.X * R[2][1] - t.Z * R[0][1]) > ra + rb)
+        // A.y <cross> B.y
+        ra = r.x * AbsR[2][1] + r.z * AbsR[0][1];
+        rb = b.r.x * AbsR[1][2] + b.r.z * AbsR[1][0];
+        if (Math.Abs(t.x * R[2][1] - t.z * R[0][1]) > ra + rb)
             return false;
 
-        // A.Y <cross> B.Z
-        ra = r.X * AbsR[2][2] + r.Z * AbsR[0][2];
-        rb = b.r.X * AbsR[1][1] + b.r.Y * AbsR[1][0];
-        if (Math.Abs(t.X * R[2][2] - t.Z * R[0][2]) > ra + rb)
+        // A.y <cross> B.z
+        ra = r.x * AbsR[2][2] + r.z * AbsR[0][2];
+        rb = b.r.x * AbsR[1][1] + b.r.y * AbsR[1][0];
+        if (Math.Abs(t.x * R[2][2] - t.z * R[0][2]) > ra + rb)
             return false;
 
-        // A.Z <cross> B.X
-        ra = r.X * AbsR[1][0] + r.Y * AbsR[0][0];
-        rb = b.r.Y * AbsR[2][2] + b.r.Z * AbsR[2][1];
-        if (Math.Abs(t.Y * R[0][0] - t.X * R[1][0]) > ra + rb)
+        // A.z <cross> B.x
+        ra = r.x * AbsR[1][0] + r.y * AbsR[0][0];
+        rb = b.r.y * AbsR[2][2] + b.r.z * AbsR[2][1];
+        if (Math.Abs(t.y * R[0][0] - t.x * R[1][0]) > ra + rb)
             return false;
 
-        // A.Z <cross> B.Y
-        ra = r.X * AbsR[1][1] + r.Y * AbsR[0][1];
-        rb = b.r.X * AbsR[2][2] + b.r.Z * AbsR[2][0];
-        if (Math.Abs(t.Y * R[0][1] - t.X * R[1][1]) > ra + rb)
+        // A.z <cross> B.y
+        ra = r.x * AbsR[1][1] + r.y * AbsR[0][1];
+        rb = b.r.x * AbsR[2][2] + b.r.z * AbsR[2][0];
+        if (Math.Abs(t.y * R[0][1] - t.x * R[1][1]) > ra + rb)
             return false;
 
-        // A.Z <cross> B.Z
-        ra = r.X * AbsR[1][2] + r.Y * AbsR[0][2];
-        rb = b.r.X * AbsR[2][1] + b.r.Y * AbsR[2][0];
-        if (Math.Abs(t.Y * R[0][2] - t.X * R[1][2]) > ra + rb)
+        // A.z <cross> B.z
+        ra = r.x * AbsR[1][2] + r.y * AbsR[0][2];
+        rb = b.r.x * AbsR[2][1] + b.r.y * AbsR[2][0];
+        if (Math.Abs(t.y * R[0][2] - t.x * R[1][2]) > ra + rb)
             return false;
 
         // No separating axis exists, so the two OBB don't intersect.
@@ -272,9 +269,9 @@ public class BoxShape : CollisionShape
     
     float DistanceSq(Vector3 a, Vector3 rhs)
     {
-        float dx = a.X - rhs.X;
-        float dy = a.Y - rhs.Y;
-        float dz = a.Z - rhs.Z;
+        float dx = a.x - rhs.x;
+        float dy = a.y - rhs.y;
+        float dz = a.z - rhs.z;
         return dx * dx + dy * dy + dz * dz;
     }
     
@@ -284,24 +281,24 @@ public class BoxShape : CollisionShape
     public static Vector3 Forward(Quaternion q)
     {
         return new Vector3(
-          -2 * (q.X * q.Z + q.W * q.Y),
-          -2 * (q.Y * q.Z - q.W * q.X),
-          -1 + 2 * (q.X * q.X + q.Y * q.Y));
+          -2 * (q.x * q.z + q.w * q.y),
+          -2 * (q.y * q.z - q.w * q.x),
+          -1 + 2 * (q.x * q.x + q.y * q.y));
     }
     public static Vector3 Up(Quaternion q)
     {
         return new Vector3(
-          2 * (q.X * q.Y - q.W * q
-               .Z),
-          1 - 2 * (q.X * q.X + q.Z * q.Z),
-          2 * (q.Y * q.Z + q.W * q.X));
+          2 * (q.x * q.y - q.w * q
+               .z),
+          1 - 2 * (q.x * q.x + q.z * q.z),
+          2 * (q.y * q.z + q.w * q.x));
     }
     public static Vector3 Right(Quaternion q)
     {
         return new Vector3(
-          1 - 2 * (q.Y * q.Y + q.Z * q.Z),
-          2 * (q.X * q.Y + q.W * q.Z),
-          2 * (q.X * q.Z - q.W * q.Y));
+          1 - 2 * (q.y * q.y + q.z * q.z),
+          2 * (q.x * q.y + q.w * q.z),
+          2 * (q.x * q.z - q.w * q.y));
     }
 
     public Vector3 ClosestPointTo(Vector3 point)
@@ -322,16 +319,16 @@ public class BoxShape : CollisionShape
         Vector3 ZAxis = MathHelper.TransformWithoutOverlap(rotation, new Vector3(0, 0, 1));
 
         var distanceX = Vector3.Dot(directionVector, XAxis);
-        if (distanceX > HalfExtents.X) distanceX = HalfExtents.X;
-        else if (distanceX < -HalfExtents.X) distanceX = -HalfExtents.X;
+        if (distanceX > HalfExtents.x) distanceX = HalfExtents.x;
+        else if (distanceX < -HalfExtents.x) distanceX = -HalfExtents.x;
 
         var distanceY = Vector3.Dot(directionVector, YAxis);
-        if (distanceY > HalfExtents.Y) distanceY = HalfExtents.Y;
-        else if (distanceY < -HalfExtents.Y) distanceY = -HalfExtents.Y;
+        if (distanceY > HalfExtents.y) distanceY = HalfExtents.y;
+        else if (distanceY < -HalfExtents.y) distanceY = -HalfExtents.y;
 
         var distanceZ = Vector3.Dot(directionVector, ZAxis);
-        if (distanceZ > HalfExtents.Z) distanceZ = HalfExtents.Z;
-        else if (distanceZ < -HalfExtents.Z) distanceZ = -HalfExtents.Z;
+        if (distanceZ > HalfExtents.z) distanceZ = HalfExtents.z;
+        else if (distanceZ < -HalfExtents.z) distanceZ = -HalfExtents.z;
 
         return Center + distanceX * XAxis + distanceY * YAxis + distanceZ * ZAxis;
     }
@@ -350,17 +347,17 @@ public class BoxShape : CollisionShape
         Vector3 ZAxis = MathHelper.TransformWithoutOverlap(obbrotation, new Vector3(0, 0, 1));
 
         var distanceX = Vector3.Dot(directionVector, XAxis);
-        if (distanceX > HalfExtents.X) distanceX = HalfExtents.X;
-        else if (distanceX < -HalfExtents.X) distanceX = -HalfExtents.X;
+        if (distanceX > HalfExtents.x) distanceX = HalfExtents.x;
+        else if (distanceX < -HalfExtents.x) distanceX = -HalfExtents.x;
 
         var distanceY = Vector3.Dot(directionVector, YAxis);
-        if (distanceY > HalfExtents.Y) distanceY = HalfExtents.Y;
-        else if (distanceY < -HalfExtents.Y) distanceY = -HalfExtents.Y;
+        if (distanceY > HalfExtents.y) distanceY = HalfExtents.y;
+        else if (distanceY < -HalfExtents.y) distanceY = -HalfExtents.y;
 
         var distanceZ = Vector3.Dot(directionVector, ZAxis);
         
-        if (distanceZ > HalfExtents.Z) distanceZ = HalfExtents.Z;
-        else if (distanceZ < -HalfExtents.Z) distanceZ = -HalfExtents.Z;
+        if (distanceZ > HalfExtents.z) distanceZ = HalfExtents.z;
+        else if (distanceZ < -HalfExtents.z) distanceZ = -HalfExtents.z;
 
         var mulX = distanceX * XAxis;
         var mulY = distanceY * YAxis;

@@ -16,7 +16,7 @@ public class BoxObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        data.UpdateShape(MathHelper.ConvertVector3(transform.position), MathHelper.ConvertVector3(transform.localScale), MathHelper.ConvertQuaternion(transform.rotation));
+        data.UpdateShape(transform.position, transform.localScale, transform.rotation);
 
     }
 }

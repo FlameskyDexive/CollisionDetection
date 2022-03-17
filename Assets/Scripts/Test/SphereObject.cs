@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Quaternion = System.Numerics.Quaternion;
 
 public class SphereObject : MonoBehaviour
 {
@@ -16,7 +15,7 @@ public class SphereObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        data.UpdateShape(MathHelper.ConvertVector3(transform.position), MathHelper.ConvertVector3(transform.localScale), Quaternion.Identity);
+        data.UpdateShape(transform.position, transform.localScale, Quaternion.identity);
 
     }
 }

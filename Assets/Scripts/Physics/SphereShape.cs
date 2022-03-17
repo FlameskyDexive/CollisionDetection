@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
+﻿using UnityEngine;
 
 public class SphereShape : CollisionShape
 {
@@ -25,7 +22,7 @@ public class SphereShape : CollisionShape
     private void Update(Vector3 pos, Vector3 size)
     {
        this.pos = pos;
-        radius = size.X * 0.5f;
+        radius = size.x * 0.5f;
     }
 
     public override bool Intersects(BoxShape box)
@@ -36,9 +33,9 @@ public class SphereShape : CollisionShape
     public override bool Intersects(SphereShape s)
     {
 
-        float distance = MathHelper.Sqrt((pos.X - s.pos.X) * (pos.X - s.pos.X) +
-                                         (pos.Y - s.pos.Y) * (pos.Y - s.pos.Y) +
-                                         (pos.Z - s.pos.Z) * (pos.Z - s.pos.Z));
+        float distance = MathHelper.Sqrt((pos.x - s.pos.x) * (pos.x - s.pos.x) +
+                                         (pos.y - s.pos.y) * (pos.y - s.pos.y) +
+                                         (pos.z - s.pos.z) * (pos.z - s.pos.z));
         return distance < (radius + s.radius);
     }
     

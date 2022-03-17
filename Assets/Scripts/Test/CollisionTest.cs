@@ -33,10 +33,10 @@ public class CollisionTest : MonoBehaviour
     [ContextMenu("LogClosePoint")]
     void LogClosePoint()
     {
-        var s = BoxShape.ClosestPointTo(new System.Numerics.Vector3(10, 10, 10),
-            new System.Numerics.Vector3(15, 15, 15),
-            new System.Numerics.Vector3(0.5f, 0.5f, 0.5f),
-            new System.Numerics.Quaternion(30, 30, 30, 30));
+        var s = BoxShape.ClosestPointTo(new Vector3(10, 10, 10),
+            new Vector3(15, 15, 15),
+            new Vector3(0.5f, 0.5f, 0.5f),
+            new Quaternion(30, 30, 30, 30));
 
         Debug.Log(s);
     }
@@ -88,14 +88,6 @@ public class CollisionTest : MonoBehaviour
 
 
     }
-
-    void OnGUI()
-    {
-        if ( GUI.Button(new Rect(0, 0, 360, 50), "convert Math between Unity and .netcore"))
-        {
-            Debug.Log($"angle:{transform.eulerAngles}, angle convert:{MathHelper.QuaternionToEuler(transform.rotation)}, " +
-                      $"qua:{transform.rotation}, qua convert:{MathHelper.EulerToQuaternion(transform.eulerAngles).ToStringF1()}");
-        }
-    }
+    
     
 }
